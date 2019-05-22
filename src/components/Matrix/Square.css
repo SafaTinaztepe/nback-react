@@ -1,0 +1,13 @@
+.sq {
+  height:100px;
+  width:100px;
+  margin:10px;
+}
+
+.false {
+  background-color: #c4c38b;
+}
+
+.true {
+  background-color: red;
+}
