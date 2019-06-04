@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/nback-react/static/css/main.b949787d.chunk.css",
+    "main.js": "/nback-react/static/js/main.fabd7c26.chunk.js",
+    "main.js.map": "/nback-react/static/js/main.fabd7c26.chunk.js.map",
+    "runtime~main.js": "/nback-react/static/js/runtime~main.29723e00.js",
+    "runtime~main.js.map": "/nback-react/static/js/runtime~main.29723e00.js.map",
+    "static/css/2.266e55a5.chunk.css": "/nback-react/static/css/2.266e55a5.chunk.css",
+    "static/js/2.ed0c4e93.chunk.js": "/nback-react/static/js/2.ed0c4e93.chunk.js",
+    "static/js/2.ed0c4e93.chunk.js.map": "/nback-react/static/js/2.ed0c4e93.chunk.js.map",
+    "index.html": "/nback-react/index.html",
+    "precache-manifest.04d4376d68b0e457643f933e9ab72d93.js": "/nback-react/precache-manifest.04d4376d68b0e457643f933e9ab72d93.js",
+    "service-worker.js": "/nback-react/service-worker.js",
+    "static/css/2.266e55a5.chunk.css.map": "/nback-react/static/css/2.266e55a5.chunk.css.map",
+    "static/css/main.b949787d.chunk.css.map": "/nback-react/static/css/main.b949787d.chunk.css.map"
+  }
+}
