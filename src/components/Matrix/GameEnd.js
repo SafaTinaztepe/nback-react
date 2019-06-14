@@ -1,11 +1,9 @@
 
 import React from 'react';
 
-const GameEnd = ({ gameend, correct }) => (
+const GameEnd = ({ correct }) => (
   <div id="result">
-    {(gameend ?
-      "Result:" + correct + "/20" :
-      "")}
+    {"Result: " + correct + "/20"}
   </div>
 );
 

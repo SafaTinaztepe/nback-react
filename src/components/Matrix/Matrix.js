@@ -3,6 +3,7 @@ import Square from './Square.js';
 import Match from './Match.js';
 import Button from 'react-bootstrap/Button';
 import GameEnd from './GameEnd.js';
+import ScoreBoard from '../ScoreBoard/ScoreBoard.js';
 import N from './N.js';
 
 
@@ -27,7 +28,8 @@ class Matrix extends Component {
 			interrupt: false,
 			ismatch: false,
 			correct: 0,
-			gameend: false
+			gameend: false,
+			history: []
 		}
 
 		this.tick = this.tick.bind(this);
@@ -36,6 +38,7 @@ class Matrix extends Component {
 		this.decrN = this.decrN.bind(this);
 		this.handleStart = this.handleStart.bind(this);
 		this.handleClear = this.handleClear.bind(this);
+		this.handleHistory = this.handleHistory.bind(this);
 		this.handleUserMatch = this.handleUserMatch.bind(this);
 	}
 
@@ -63,7 +66,7 @@ class Matrix extends Component {
 		let x;
 		let y;
 		let xy;
-		if(self.state.sequence.length < self.state.n || Math.random() < .7){
+		if(self.state.sequence.length < self.state.n || Math.random() < .5){
 			x = parseInt(Math.floor(Math.random() * 3));
 			y = parseInt(Math.floor(Math.random() * 3));
 			xy = ""+x+y;
@@ -94,6 +97,13 @@ class Matrix extends Component {
 				m: new_m
 			});
 
+			// time between blinks
+			if(i<self.state.length && !self.state.interrupt){
+				setTimeout(function(){
+					self.tick(++i, self);
+				}, 1000);
+			}
+
 			// check if user has right answer
 			if(self.state.ismatch === self.state.usermatch){
 				self.setState({
@@ -106,14 +116,6 @@ class Matrix extends Component {
 				usermatch: false
 			});
 
-			// time between blinks
-			if(i<self.state.length && !self.state.interrupt){
-				setTimeout(function(){
-					self.tick(++i, self);
-				}, 1000);
-			}
-
-
 		}, 1000);
 
 		// display score
@@ -121,21 +123,22 @@ class Matrix extends Component {
 			self.setState({
 				gameend: true
 			});
-			this.props.handleHistory(`n=${this.state.n} score=${this.state.correct}/20`);
+			this.handleHistory(<tr><td>{this.state.n}</td><td>{this.state.correct/20.0}</td></tr>);//`n=${this.state.n} score=${this.state.correct}/20`);
+			return;
 		}
 	}
 
 	handleStart(){
 		this.setState({
-			interrupt: false
+			interrupt: false,
+			correct: 0
 		});
 		this.tick(0, this);
 	}
 
 	handleClear() {
 	  this.setState({
-			interrupt: true,
-			correct: 0
+			interrupt: true
 		});
 	}
 
@@ -158,10 +161,16 @@ class Matrix extends Component {
 		}
 	}
 
+	handleHistory(score){
+		this.setState({
+			history: [...this.state.history, score]
+		});
+	}
+
 
   render() {
 		return(
-			<div>
+			<div style={{textAlign:'center'}}>
 	    <table style={{margin: "0 auto"}}>
 				<tbody id="rootM">
 					{this.drawM()}
@@ -169,14 +178,14 @@ class Matrix extends Component {
 			</table>
 
 			<N n={this.state.n} incrN={this.incrN} decrN={this.decrN} />
-
 			<Button variant="success"id="start" onClick={this.handleStart}>Start</Button>
 			<Button variant="danger" id="clear" onClick={this.handleClear}>Stop</Button>
 			<br />
 			<Match callback={this.handleUserMatch} />
 			<br />
-			<GameEnd gameend={this.state.gameend} correct={this.state.correct} />
+			{(this.state.gameend ? <GameEnd correct={this.state.correct} /> : this.state.gameend)}
 
+			<ScoreBoard history={this.state.history} />
 			</div>
 		)
   }

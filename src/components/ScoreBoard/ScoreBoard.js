@@ -1,24 +1,12 @@
-import React, { Component } from 'react';
-//import './Square.css';
+import React from 'react';
 
-
-class ScoreBoard extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-
-    };
-
-  }
-
-
-  render(){
-    return(
-      <div className="col-md-6" style={{float:'left'}}>
-      </div>
-    )
-  }
-
-}
+const ScoreBoard = ({ history }) => (
+  <div id="ScoreBoard">
+    <table border={1}>
+      <tr><th>N</th><th>Score</th></tr>
+      {history}
+    </table>
+  </div>
+);
 
 export default ScoreBoard;
